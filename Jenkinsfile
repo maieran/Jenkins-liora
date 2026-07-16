@@ -1,7 +1,10 @@
 pipeline {
+    agent any
     stages {
         stage('Love') {
-            echo 'I love Liora'
+            steps {
+                echo 'I love Liora'
+            }
         }
     }
 }
