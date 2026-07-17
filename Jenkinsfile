@@ -98,10 +98,10 @@ pipeline {
                 }
                 script {
                     sh '''
-                        rm -rf ~/.kube
-                        mkdir ~/.kube
+                        rm -rf .kube
+                        mkdir .kube
                         ls 
-                        cat $KUBECONFIG > ~/.kube/config
+                        cat $KUBECONFIG > .kube/config
                         cp fastapi/values.yaml values.yml
                         cat values.yml
                         sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
@@ -110,5 +110,15 @@ pipeline {
                 }
             }
         }
+
+        post {
+            failure {
+                echo "This will run if the job failed"
+                mail to: "${RECIPIENT_EMAIL}",
+                    subject "${env.JOB_NAME} - Build # ${BUILD_ID} hast failed",
+                    body: "For more info on the pipeline failure, checkout the console output at ${env.BUILD_URL}"
+            }
+        }
+
     }
 }
