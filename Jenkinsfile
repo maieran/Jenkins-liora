@@ -98,14 +98,14 @@ pipeline {
                 }
                 script {
                     sh '''
-                        rm -rf .kube
-                        mkdir .kube
-                        ls 
-                        cat $KUBECONFIG > .kube/config
+                        rm -rf ~/.kube
+                        mkdir ~/.kube
+                        ls
+                        cat $KUBECONFIG > ~/.kube/config
                         cp fastapi/values.yaml values.yml
                         cat values.yml
                         sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                        helm get --install app fastapi --values=values.yml --namespace jenkins-prod
+                        helm upgrade --install app fastapi --values=values.yml --namespace jenkins-prod
                     '''
                 }
             }
