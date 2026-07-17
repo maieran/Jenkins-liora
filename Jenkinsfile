@@ -115,7 +115,7 @@ pipeline {
             failure {
                 echo "This will run if the job failed"
                 mail to: "${RECIPIENT_EMAIL}",
-                    subject "${env.JOB_NAME} - Build # ${BUILD_ID} hast failed",
+                    subject: "${env.JOB_NAME} - Build # ${BUILD_ID} has failed",
                     body: "For more info on the pipeline failure, checkout the console output at ${env.BUILD_URL}"
             }
         }
