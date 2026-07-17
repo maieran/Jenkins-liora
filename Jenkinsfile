@@ -105,7 +105,7 @@ pipeline {
                         cp fastapi/values.yaml values.yml
                         cat values.yml
                         sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                        helm upgrade --install app fastapi --values=values.yml --namespace jenkins-prod
+                        helm get --install app fastapi --values=values.yml --namespace jenkins-prod
                     '''
                 }
             }
